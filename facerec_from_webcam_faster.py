@@ -16,8 +16,14 @@ import cv2
 video_capture = cv2.VideoCapture(0)
 
 # Load a sample picture and learn how to recognize it.
-obama_image = face_recognition.load_image_file("sivert.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+sivert_image = face_recognition.load_image_file("sivert.jpg")
+sivert_face_encoding = face_recognition.face_encodings(sivert_image)[0]
+
+aksel_image = face_recognition.load_image_file("aksel.jpg")
+aksel_face_encoding = face_recognition.face_encodings(aksel_image)[0]
+
+audun_image = face_recognition.load_image_file("audun.jpg")
+audun_face_encoding = face_recognition.face_encodings(audun_image)[0]
 
 # Initialize some variables
 face_locations = []
@@ -41,11 +47,15 @@ while True:
         face_names = []
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
-            match = face_recognition.compare_faces([obama_face_encoding], face_encoding)
+            match = face_recognition.compare_faces([sivert_face_encoding, aksel_face_encoding, audun_face_encoding], face_encoding)
             name = "Unknown"
 
             if match[0]:
                 name = "Sivert"
+            if match[1]:
+                name = "Aksel"
+            if match[2]:
+                name = "Audun"
 
             face_names.append(name)
 
